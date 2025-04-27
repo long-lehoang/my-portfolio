@@ -16,7 +16,7 @@ const Experience = () => {
         "Designed and optimized MongoDB queries, reducing response times."
       ],
       techStack: ["Java (Spring Boot)", "ReactJS", "MongoDB", "AWS", "K8s", "ArgoCD", "SonarQube"],
-      side: "right"
+      side: "right" as const
     },
     {
       position: "Senior Software Engineer",
@@ -31,7 +31,7 @@ const Experience = () => {
         "Managed CI/CD pipelines with Jenkins and SonarQube, reducing deployment time by 50%."
       ],
       techStack: ["Java (Quarkus)", "AWS Lambda", "MySQL", "MongoDB", "Terraform", "Jenkins"],
-      side: "left"
+      side: "left" as const
     },
     {
       position: "Software Engineer",
@@ -44,7 +44,7 @@ const Experience = () => {
         "Worked closely with customer business analysts to design migration workflows."
       ],
       techStack: ["Java (Spring Boot)", "Spring Batch", "Spring Data", "TiDB", "Kafka", "Docker"],
-      side: "right"
+      side: "right" as const
     },
     {
       position: "Fresher Software Engineer",
@@ -58,7 +58,7 @@ const Experience = () => {
         "Worked closely with senior developers to improve coding best practices."
       ],
       techStack: ["PHP (Laravel)", "MySQL", "JavaScript"],
-      side: "left"
+      side: "left" as const
     }
   ];
 

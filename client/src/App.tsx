@@ -37,12 +37,12 @@ function Router() {
   return (
     <Switch>
       <Route path="/" component={Home} />
-      <Route path="/#about" component={Home} />
-      <Route path="/#skills" component={Home} />
-      <Route path="/#experience" component={Home} />
-      <Route path="/#certification" component={Home} />
-      <Route path="/#projects" component={Home} />
-      <Route path="/#contact" component={Home} />
+      <Route path="/#about" component={About} />
+      <Route path="/#skills" component={Skills} />
+      <Route path="/#experience" component={Experience} />
+      <Route path="/#certification" component={Certification} />
+      <Route path="/#projects" component={Projects} />
+      <Route path="/#contact" component={Contact} />
       <Route component={NotFound} />
     </Switch>
   );

@@ -9,7 +9,6 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
-import { apiRequest } from "@/lib/queryClient";
 
 const formSchema = z.object({
   name: z.string().min(2, { message: "Name must be at least 2 characters." }),
@@ -36,23 +35,32 @@ const Contact = () => {
 
   const onSubmit = async (data: FormValues) => {
     setIsSubmitting(true);
-    try {
-      await apiRequest("POST", "/api/contact", data);
-      toast({
-        title: "Message sent!",
-        description: "Thank you for your message. I will get back to you soon.",
-        variant: "default",
-      });
-      form.reset();
-    } catch (error) {
-      toast({
-        title: "Failed to send message",
-        description: "Please try again later or contact me directly via email.",
-        variant: "destructive",
-      });
-    } finally {
-      setIsSubmitting(false);
-    }
+    
+    // Simulating form submission with a timeout
+    setTimeout(() => {
+      try {
+        // Log form data to console (in a real app you might use a form service like Formspree, EmailJS, etc.)
+        console.log('Form submitted:', data);
+        
+        // Show success message
+        toast({
+          title: "Message sent!",
+          description: "Thank you for your message. I will get back to you soon.",
+          variant: "default",
+        });
+        
+        // Reset form
+        form.reset();
+      } catch (error) {
+        toast({
+          title: "Failed to send message",
+          description: "Please try again later or contact me directly via email.",
+          variant: "destructive",
+        });
+      } finally {
+        setIsSubmitting(false);
+      }
+    }, 1000);
   };
 
   return (

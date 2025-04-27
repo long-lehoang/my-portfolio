@@ -7,8 +7,19 @@ import { Button } from "@/components/ui/button";
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [location] = useLocation();
+  const [location, setLocation] = useLocation();
   const [activeSection, setActiveSection] = useState("home");
+
+  // Extract section from URL on component mount and location change
+  useEffect(() => {
+    // Extract section from hash
+    if (location.startsWith("/#")) {
+      const sectionId = location.substring(2);
+      setActiveSection(sectionId);
+    } else if (location === "/") {
+      setActiveSection("home");
+    }
+  }, [location]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -22,7 +33,15 @@ const Header = () => {
         if (element) {
           const rect = element.getBoundingClientRect();
           if (rect.top <= 200) {
-            setActiveSection(section);
+            if (activeSection !== section) {
+              setActiveSection(section);
+              
+              // Update the URL without triggering navigation
+              const newPath = section === "home" ? "/" : `/#${section}`;
+              if (location !== newPath) {
+                window.history.replaceState(null, "", newPath);
+              }
+            }
             break;
           }
         }
@@ -31,7 +50,7 @@ const Header = () => {
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [activeSection, location]);
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
@@ -48,7 +67,7 @@ const Header = () => {
 
         {/* Desktop Navigation */}
         <div className="hidden md:flex space-x-8">
-          <Link href="/#home">
+          <Link href="/">
             <a className={`text-sm font-medium nav-link ${activeSection === "home" ? "active" : ""}`}>
               Home
             </a>
